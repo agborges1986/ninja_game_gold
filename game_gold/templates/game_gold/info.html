@@ -1,0 +1,40 @@
+{% extends 'game_gold/base.html' %}
+
+{% block info %}
+    <h1>Datos del Juego</h1>
+    <br>
+    <a href="{% url 'index' %}">Página Inicial</a>
+    <br>
+    <a href="{% url 'reset' %}">Reset</a>
+    <br>
+    <h6>Gold:{{request.session.gold}} </h6>
+    {%if request.session.game %}
+    <div class="row mx-auto">
+        {% for i in request.session.game %}
+        <div class="col-md-3 card px-5 text-center">
+            <form action="process_money/" method="POST">
+                {% csrf_token %}
+                <h2>{{i.name}}</h2>
+                {% if i.min >= 0 %}
+                    <p>Gana {{i.min}}-{{i.max}} monedas</p>
+                {% else %}
+                    <p>Gana/Pierde 0-{{i.max}}monedas</p>
+                {% endif %}
+                <button class="btn btn-success" name={{i.name}}>Find Gold</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="plays">
+        <ul>
+        {% for i in request.session.plays%}
+            {% if i.minado >= 0 %}
+                <li class="text-success">Gana: en {{i.name}} {{i.minado}} monedas </li>
+            {% else %}
+                <li class="text-danger">Pierde en {{i.name}} {{i.minado}} monedas</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+{% endblock info %}
