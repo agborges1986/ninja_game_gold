@@ -1,24 +1,10 @@
 {% extends 'game_gold/base.html' %}
 
 {% block info %}
-    <h1>Datos del Juego</h1>
-    <div class="row mx-auto">
-    <br>
-    {% comment %} <a href="{% url 'index' %}" class="col-md-4 h4">Página Inicial</a> {% endcomment %}
-    <a href="{% url 'reset' %}" class="col-md-6 h4">Reset</a>
-    <a href="{% url 'config' %}" class="col-md-6 h4">Configurar Juego</a>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-6 offset-md-3 justify-content-center">
-            <h1 class="text-warning">Gold:{{request.session.gold}}</h1>
-        </div>
-    </div>
-    {%if request.session.game %}
+    <h1>Configura el Juego</h1>
     <div class="row m-10">
-        {% for i in request.session.game %}
         <div class="col px-md-3 align-self-center">
-            <form action="process_money/" method="POST" class="p-10 m-10 border">
+            <form action="config_success/" method="POST" class="p-10 m-10 border">
                 {% csrf_token %}
                 <h2>{{i.name}}</h2>
                 <div class="card-body">

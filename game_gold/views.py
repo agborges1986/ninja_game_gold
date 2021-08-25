@@ -47,4 +47,7 @@ def reset_game(request):
     return redirect('/')
 
 def config_game(request):
-    pass
+    return redirect('/')
+
+def config_succes(request):
+    return redirect('/')
