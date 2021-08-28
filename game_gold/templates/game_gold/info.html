@@ -34,14 +34,16 @@
         </div>
         {% endfor %}
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-10">
         <div class="plays col-md-4">
             <ul>
+            <h6>Jugadas:</h6>
+            <br>
             {% for i in request.session.plays%}
                 {% if i.minado >= 0 %}
-                    <p class="text-success font-italic h-25">Gana: en {{i.name}} {{i.minado}} monedas </p>
+                    <p class="text-success font-italic h-25">Gana: en {{i.name}} {{i.minado}} monedas!!!! ({{request.session.time}}) </p>
                 {% else %}
-                    <p class="text-danger font-italic h-25">Pierde en {{i.name}} {{i.minado}} monedas</p>
+                    <p class="text-danger font-italic h-25">Pierde en {{i.name}} {{i.minado}} monedas..oops ({{request.session.time}})</p>
                 {% endif %}
             {% endfor %}
             </ul>

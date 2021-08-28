@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse,redirect
 from . import models
 from django.forms.models import model_to_dict
 from django.core import serializers
+from datetime import datetime
+
 
 game1=models.Game("Game1")
 farm=models.PlaceGold("Farm", min=10, max=20)
@@ -20,6 +22,7 @@ def index(request):
         request.session['playing']=True
         request.session['gold']=game1.gold
         request.session['plays']=game1.plays
+        
     else:
         #Control para mejoras al juego
         game1.appendPlace(farm).appendPlace(cave).appendPlace(house).appendPlace(casino)
@@ -28,6 +31,7 @@ def index(request):
     return render(request, 'game_gold/info.html')
 
 def process_money(request):
+    request.session['time']=datetime.now().strftime("%Y-%m-%d %H:%M:%S %p")
     print(request.POST)
     if 'Farm' in request.POST:
         print(request.POST['Farm'])
